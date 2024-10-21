@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gráficos de {{ nadador['Nombre'] }}</title>
+</head>
+<body>
+    <h1>Gráficos de {{ nadador['Nombre'] }}</h1>
+    {% for resultado in nadador['Resultados'] %}
+        <h2>Estilo: {{ resultado['Estilo'] }}, Distancia: {{ resultado['Distancia'] }}</h2>
+        <img src="{{ url_for('static', filename=nador['Nombre'] + '_' + resultado['Estilo'] + '_' + resultado['Distancia'] + '.png') }}" alt="Gráfico">
+    {% endfor %}
+    <a href="/">Volver</a>
+</body>
+</html>

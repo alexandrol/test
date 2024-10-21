@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Procesar PDFs</title>
+    <style>
+        #progress {
+            width: 100%;
+            background-color: #f3f3f3;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none; /* Ocultar inicialmente */
+        }
+        #progress-bar {
+            width: 0;
+            height: 30px;
+            background-color: #4caf50;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        function mostrarProgreso() {
+            document.getElementById('progress').style.display = 'block';
+            let progreso = 0;
+            const interval = setInterval(() => {
+                if (progreso >= 100) {
+                    clearInterval(interval);
+                } else {
+                    progreso += 10; // Incrementar el progreso
+                    document.getElementById('progress-bar').style.width = progreso + '%';
+                }
+            }, 1000); // Actualizar cada segundo
+        }
+    </script>
+</head>
+<body>
+    <h1>Procesar Archivos PDF</h1>
+    <p>Se están procesando todos los archivos PDF en la raíz del proyecto.</p>
+    <button onclick="mostrarProgreso(); window.location.href='/upload';">Iniciar procesamiento</button>
+    <div id="progress">
+        <div id="progress-bar"></div>
+    </div>
+</body>
+</html>

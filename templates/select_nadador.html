@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Seleccionar Nadador</title>
+</head>
+<body>
+    <h1>Seleccionar Nadador</h1>
+    <form action="/graficos" method="get">
+        <label for="nombre_nadador">Nadador:</label>
+        <select id="nombre_nadador" name="nombre_nadador">
+            {% for nadador in nadadores %}
+                <option value="{{ nadador['Nombre'] }}" {% if nadador['Nombre'] == nombre_nadador %}selected{% endif %}>{{ nadador['Nombre'] }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="tipo_grafico">Tipo de Gráfico:</label>
+        <select id="tipo_grafico" name="tipo_grafico" required>
+            <option value="estilo_tiempo_fecha" {% if tipo_grafico == 'estilo_tiempo_fecha' %}selected{% endif %}>Gráfico de Estilo/Tiempo/Fecha</option>
+            <option value="rendimiento" {% if tipo_grafico == 'rendimiento' %}selected{% endif %}>Gráfico de Rendimiento</option>
+            <option value="promedio_de_pases_en_100m" {% if tipo_grafico == 'promedio_de_pases_en_100m' %}selected{% endif %}>Gráfico tiempos promedios en 100m</option>
+            <option value="minimo_de_pases_en_100m" {% if tipo_grafico == 'minimo_de_pases_en_100m' %}selected{% endif %}>Gráfico tiempos mínimos en 100m</option>
+        </select>
+
+        <button type="submit">Ver Gráficos</button>
+    </form>
+
+    {% if graficos %}
+        <h2>Gráficos de {{ nombre_nadador }}</h2>
+        {% for grafico in graficos %}
+            <img src="{{ url_for('static', filename=grafico.split('/')[-1]) }}" alt="Gráfico">
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
